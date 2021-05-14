@@ -19,7 +19,6 @@ const Products = () => {
                 imgSrc: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.3/w_458,c_limit/6d21d736-6a4b-441b-b756-c6d591a379d3/%D0%BA%D1%80%D0%BE%D1%81%D1%81%D0%BE%D0%B2%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%B7%D0%B0%D0%B1%D0%B5%D0%B3%D0%BE%D0%B2-zoomx-vaporfly-next-2-og-dxSLFw.png'
             },
 
-
             {
                 id: 3, name: 'Revolution 5',
                 brand: 'Nike', price: '350.99',
@@ -44,14 +43,12 @@ const Products = () => {
                 imgSrc: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.3/w_330,c_limit/c902698e-6365-4a30-89b2-ffcbff6faaf6/%D1%84%D0%BB%D0%B8%D1%81%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B1%D1%80%D1%8E%D0%BA%D0%B8-sportswear-essential-k62xpw.png'
             },
 
-    
-
         ])
     }, [])
 
     return (
         <Container>
-            <Row>
+            <Row style={{ marginTop: '20px', marginBottom: '20px' }}>
                 {products.map(product =>
                     <Product key={product.id}
                         product={product} />
