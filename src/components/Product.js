@@ -37,8 +37,8 @@ const Product = ({ product }) => {
             <Card.Img variant="top" src={product.imgSrc} />
             <Card.Body className="productCardBody">
                 <Card.Title>
-
-                    <a href="productID"
+                   
+                    <a href={`product/${product.id}`}
                         className="productLink">
                         {product.brand} {product.name} ({product.price}$)
                     </a>
