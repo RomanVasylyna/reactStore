@@ -54,19 +54,17 @@ const Navigation = () => {
             <h1>Home</h1>
           </Route>
 
-          <Route path="/about" exact>
+          <Route path="/about">
             <h1>About</h1>
           </Route>
 
-          <Route path="/products" exact>
+          <Route path="/products">
             <Products />
           </Route>
 
-          <Route path="/product/:id" exact>
-            <SingleProduct />
-          </Route>
+          <Route path="/product/:id" component={SingleProduct}/>
 
-          <Route path="/cart" exact>
+          <Route path="/cart">
             <h1>Cart</h1>
           </Route>
 
