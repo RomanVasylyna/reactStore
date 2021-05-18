@@ -8,8 +8,8 @@ import SingleProduct from './SingleProduct';
 
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
+    Switch,
     Link
 } from "react-router-dom";
 
@@ -26,29 +26,15 @@ const Product = ({ product }) => {
 
     return (
 
-        <Router>
-
-        <Switch>
-            <Route path="/productID">
-                <SingleProduct />
-            </Route>
-        </Switch>
-
-
         <Card style={productCard}>
             <Card.Img variant="top" src={product.imgSrc} />
             <Card.Body className="productCardBody">
                 <Card.Title>
 
-                <Link to={`/product/${product.id}`}
-                 className="productLink">
-                <p>{product.brand} {product.name} ({product.price}$)</p>
-                </Link>
-{/*
-                <LinkContainer to={`product/${product.id}`}
-                className="productLink">
-                <p>{product.brand} {product.name} ({product.price}$)</p>
-                </LinkContainer> */}
+                    <Link to={`/product/${product.id}`}
+                        className="productLink">
+                        <p>{product.brand} {product.name} ({product.price}$)</p>
+                    </Link>
 
                 </Card.Title>
                 <Card.Text>
@@ -57,7 +43,8 @@ const Product = ({ product }) => {
                 <Button variant="primary"><FontAwesomeIcon icon={faCartPlus} /></Button>
             </Card.Body>
         </Card>
-        </Router>
+
+
     )
 }
 

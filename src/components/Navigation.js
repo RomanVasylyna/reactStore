@@ -46,8 +46,7 @@ const Navigation = () => {
           </Navbar.Collapse>
         </Navbar>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+
         <Switch>
 
           <Route path="/" exact>
@@ -62,17 +61,15 @@ const Navigation = () => {
             <Products />
           </Route>
 
-          <Route path="/product">
-            <Route path="/:id">
-              <SingleProduct/>
-            </Route>
+          <Route path="/product/:id">
+            <SingleProduct />
           </Route>
 
           <Route path="/cart">
             <h1>Cart</h1>
           </Route>
 
-      
+
 
         </Switch>
       </div>
