@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 const SingleProduct = () => {
-
+console.log('ree');
     return (
         <Container className="container">
             <h1>Product Name</h1>

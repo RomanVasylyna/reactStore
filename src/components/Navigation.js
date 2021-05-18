@@ -27,18 +27,18 @@ const Navigation = () => {
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
 
-              <LinkContainer to="about">
+              <LinkContainer to="/about">
                 <Nav.Link>About</Nav.Link>
               </LinkContainer>
 
-              <LinkContainer to="products">
+              <LinkContainer to="/products">
                 <Nav.Link>Products</Nav.Link>
               </LinkContainer>
 
             </Nav>
 
             <Nav>
-              <LinkContainer to="cart">
+              <LinkContainer to="/cart">
                 <Nav.Link><FontAwesomeIcon icon={faShoppingCart} /></Nav.Link>
               </LinkContainer>
             </Nav>
@@ -62,11 +62,17 @@ const Navigation = () => {
             <Products />
           </Route>
 
-          <Route path="/product/:id" component={SingleProduct}/>
+          <Route path="/product">
+            <Route path="/:id">
+              <SingleProduct/>
+            </Route>
+          </Route>
 
           <Route path="/cart">
             <h1>Cart</h1>
           </Route>
+
+      
 
         </Switch>
       </div>
