@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from 'react-router-dom';
 
-const SingleProduct = () => {
+const SingleProduct = ({ products }) => {
+
+    let { id } = useParams();
+    let product = [];
+
+    useEffect(() => {
+    product = products.filter(product => product.id == id);
+    console.log(product);
+    }, product.length) //Какие параметры можно передавать в useEffect??
+    // Добавить useState продукта
+
     return (
         <Container className="container">
-            <h1>Product Name</h1>
+            <h1>{product.name}</h1>
             <Row style={{ margin: '20px 0px' }}>
 
                 <Col sm={5}>

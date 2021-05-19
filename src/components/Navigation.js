@@ -13,7 +13,7 @@ import {
   Route
 } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = ({ products }) => {
   return (
     <Router>
       <div>
@@ -58,11 +58,11 @@ const Navigation = () => {
           </Route>
 
           <Route path="/products">
-            <Products />
+            <Products products={products}/>
           </Route>
 
           <Route path="/product/:id">
-            <SingleProduct />
+            <SingleProduct products={products}/>
           </Route>
 
           <Route path="/cart">
