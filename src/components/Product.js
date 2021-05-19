@@ -4,7 +4,6 @@ import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LinkContainer } from 'react-router-bootstrap';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import SingleProduct from './SingleProduct';
 
 import {
     BrowserRouter as Router,
@@ -31,10 +30,9 @@ const Product = ({ product }) => {
             <Card.Body className="productCardBody">
                 <Card.Title>
 
-                    <Link to={`/product/${product.id}`}
-                        className="productLink">
+                    <LinkContainer to={`/product/${product.id}`} className="productLink">
                         <p>{product.brand} {product.name} ({product.price}$)</p>
-                    </Link>
+                    </LinkContainer>
 
                 </Card.Title>
                 <Card.Text>

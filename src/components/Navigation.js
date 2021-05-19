@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 
 const Navigation = ({ products }) => {
+
   return (
     <Router>
       <div>
@@ -58,15 +59,16 @@ const Navigation = ({ products }) => {
           </Route>
 
           <Route path="/products">
-            <Products products={products}/>
+            <Products products={products} />
           </Route>
 
           <Route path="/product/:id">
-            <SingleProduct products={products}/>
+            <SingleProduct products={products} />
           </Route>
 
           <Route path="/cart">
             <h1>Cart</h1>
+            <p>Currently you have no items in the cart</p>
           </Route>
 
 
