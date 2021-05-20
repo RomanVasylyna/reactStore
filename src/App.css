@@ -3,9 +3,10 @@
 .productLink{
   text-decoration: none;
   color:rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 .productLink:hover{
-  text-decoration: none;  
+  text-decoration: none;
   color: rgb(20, 20, 179);
 }

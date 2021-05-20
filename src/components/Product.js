@@ -18,7 +18,6 @@ const Product = ({ product }) => {
     // Styling
 
     const productCard = {
-        cursor: 'pointer',
         width: '22rem',
         margin: '10px',
     }
@@ -26,10 +25,16 @@ const Product = ({ product }) => {
     return (
 
         <Card style={productCard}>
-            <Card.Img variant="top" src={product.imgSrc} />
+
+            {/* Link */}
+            <LinkContainer to={`/product/${product.id}`} style={{ cursor: 'pointer' }}>
+                <Card.Img variant="top" src={product.imgSrc} />
+            </LinkContainer>
+
             <Card.Body className="productCardBody">
                 <Card.Title>
 
+                    {/* Link */}
                     <LinkContainer to={`/product/${product.id}`} className="productLink">
                         <p>{product.brand} {product.name} ({product.price}$)</p>
                     </LinkContainer>
@@ -38,7 +43,16 @@ const Product = ({ product }) => {
                 <Card.Text>
                     Описание Товара
                 </Card.Text>
-                <Button variant="primary"><FontAwesomeIcon icon={faCartPlus} /></Button>
+
+                <Button variant="primary" onClick={() => console.log(product)}>
+                    <FontAwesomeIcon icon={faCartPlus} />
+                </Button>
+
+                {/* из child элемента напрямую никак нельзя передать пропсы,
+                но можно вызвать функцию, которая в свою очередь поменяет state
+                у родительского компонента
+                */}
+
             </Card.Body>
         </Card>
 

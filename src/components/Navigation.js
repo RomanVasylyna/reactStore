@@ -1,12 +1,13 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import Products from './Products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import Products from './Products';
 import SingleProduct from './SingleProduct';
 import Home from './Home';
 import About from './About';
+import Cart from './Cart';
 
 // Importing Router
 import {
@@ -69,8 +70,7 @@ const Navigation = ({ products }) => {
           </Route>
 
           <Route path="/cart">
-            <h1>Cart</h1>
-            <p>Currently you have no items in the cart</p>
+            <Cart />
           </Route>
 
 
