@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,14 @@ import {
 } from "react-router-dom";
 
 
-const Product = ({ product }) => {
+const Product = ({ product, onAddToCart, cart }) => {
+
+    // Убираем дубликаты товаров из корзины
+    const [addedItem, setAddedItem] = useState(true);
+
+    useEffect(() => {
+        setAddedItem(!cart.filter(cartItem => cartItem.id === product.id).length);
+    }, [cart]);
 
     // Styling
 
@@ -44,9 +51,15 @@ const Product = ({ product }) => {
                     Описание Товара
                 </Card.Text>
 
-                <Button variant="primary" onClick={() => console.log(product)}>
-                    <FontAwesomeIcon icon={faCartPlus} />
-                </Button>
+                {addedItem ?
+                    <Button variant="primary" onClick={() => onAddToCart(product.id)}>
+                        <FontAwesomeIcon icon={faCartPlus} />
+                    </Button>
+                    :
+                    <Button variant="danger">
+                        <FontAwesomeIcon icon={faCartPlus} />
+                    </Button>
+                }
 
                 {/* из child элемента напрямую никак нельзя передать пропсы,
                 но можно вызвать функцию, которая в свою очередь поменяет state

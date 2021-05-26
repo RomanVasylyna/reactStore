@@ -16,7 +16,7 @@ import {
   Route
 } from "react-router-dom";
 
-const Navigation = ({ products }) => {
+const Navigation = ({ products, cart, onAddToCart }) => {
 
   return (
     <Router>
@@ -62,7 +62,7 @@ const Navigation = ({ products }) => {
           </Route>
 
           <Route path="/products">
-            <Products products={products} />
+            <Products products={products} onAddToCart={onAddToCart} cart={ cart }/>
           </Route>
 
           <Route path="/product/:id">
@@ -70,7 +70,7 @@ const Navigation = ({ products }) => {
           </Route>
 
           <Route path="/cart">
-            <Cart />
+            <Cart cart={cart}/>
           </Route>
 
 

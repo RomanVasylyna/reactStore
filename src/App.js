@@ -6,7 +6,21 @@ import Navigation from './components/Navigation';
 
 function App() {
 
+    // убрать повторы из массива
+    // добавить total price
+    // если такой товар уже есть в корзине то менять кол-во в инпуте
+    // добавить возможность удаления товара из корзины
+    // добавить возможность добавлять товар в корзину из компонента SingleProduct
+
+
     const [products, setProducts] = useState([]);
+
+    const [cart, setCart] = useState([]);
+
+    // Добавляем товар в корзину
+    const addToCart = id => {
+        setCart([...cart, { id, count: 1, product: products.filter(product => product.id === id)[0] }]);
+    }
 
     useEffect(() => {
         setProducts([
@@ -57,7 +71,7 @@ function App() {
 
     return (
         <div className="main">
-            <Navigation products={products} />
+            <Navigation products={products} cart={cart} onAddToCart={addToCart} />
         </div>
     );
 
