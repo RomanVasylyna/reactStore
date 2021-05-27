@@ -9,15 +9,15 @@ const Cart = ({ cart, totalAmount, clearCart, increaseCount }) => {
     return (
         <Container>
             <h1>Cart</h1>
-             
+
             <Row>
 
-            <Col xs={12} md={12} xl={5}>   
+            <Col xs={12} md={12} xl={5}>
             { cart.length ?
                 cart.map(cartItem => <CartSingleItem key={cartItem.id} cartItem={cartItem} cart={cart} increaseCount={increaseCount}/>)
                 : <p style={{ fontSize: '1.3rem' }}>Your Cart is empty...</p>
             }
-            </Col> 
+            </Col>
 
             { cart.length ?
             <Col xs={12} md={4} xl={7} style={{ textAlign: 'center' }}>
@@ -26,7 +26,7 @@ const Cart = ({ cart, totalAmount, clearCart, increaseCount }) => {
             </Col>
             : ''
             }
-            
+
 
             </Row>
 

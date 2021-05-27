@@ -14,10 +14,10 @@ function App() {
 
     // Задаем state продуктов
     const [products, setProducts] = useState([]);
-    
+
     // Задаем state корзины
     const [cart, setCart] = useState([]);
-    
+
     // Задаем state тотал эмаунт
     const [totalAmount, setTotalAmount] = useState(0);
 
@@ -37,13 +37,17 @@ function App() {
     }
 
     const clearCart = () => {
-      setCart([]);  
+        setCart([]);
     }
-    
+
     const increaseCount = id => {
-    // По клику в product.price нужно добавить новое значение,
-    // а именно : product.price * count (который внутри cart)
-      setCart(cart.map(item => item.id === id ? {...item, count: item.count+1 } : item ));
+        // По клику в product.price нужно добавить новое значение,
+        // а именно : product.price * count (который внутри cart)
+
+        // изменить цену в продукте именно который в cart
+        setCart(cart.map(item => item.id === id ? { ...item, count: item.count + 1 } : item));
+        // setCart(cart.map(item => item.id === id ? { ...item, product: 3 } : item));
+        setProducts(products.map(product => product.id === id ? { ...product, price: (+product.price * +cart.map(cartItem => cartItem.id === id ? cartItem.count : '')) } : product));
     }
 
 
@@ -93,19 +97,21 @@ function App() {
 
         ])
 
-        setTotalAmount(getTotalAmount());
-    }, [cart.length])
+        // Каждый раз обновляем состояние totalAmount при ре-рендере
+        setTotalAmount(getTotalAmount);
+
+    }, [cart.length]) //totalAmount
 
     return (
         <div className="main">
-            <Navigation 
-            products={products} 
-            cart={cart} 
-            onAddToCart={addToCart} 
-            onRemoveFromCart={removeFromCart}
-            totalAmount={totalAmount}
-            clearCart={clearCart}
-            increaseCount={increaseCount} />
+            <Navigation
+                products={products}
+                cart={cart}
+                onAddToCart={addToCart}
+                onRemoveFromCart={removeFromCart}
+                totalAmount={totalAmount}
+                clearCart={clearCart}
+                increaseCount={increaseCount} />
         </div>
     );
 
