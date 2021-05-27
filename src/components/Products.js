@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Product from './Product';
 import { Container, Row } from 'react-bootstrap';
 
-const Products = ({products, onAddToCart, cart }) => {
+const Products = ({products, onAddToCart, onRemoveFromCart, cart  }) => {
 
     let [ productToCart, setProductToCart ] = useState([]);
 
@@ -13,7 +13,8 @@ const Products = ({products, onAddToCart, cart }) => {
                     <Product key={product.id}
                     onAddToCart={onAddToCart}
                         product={product}
-                        cart={cart} />
+                        cart={cart}
+                        onRemoveFromCart={onRemoveFromCart} />
                 )}
             </Row>
         </Container>

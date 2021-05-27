@@ -3,7 +3,7 @@ import '../App.css';
 import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LinkContainer } from 'react-router-bootstrap';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import {
     BrowserRouter as Router,
@@ -13,7 +13,7 @@ import {
 } from "react-router-dom";
 
 
-const Product = ({ product, onAddToCart, cart }) => {
+const Product = ({ product, onAddToCart, onRemoveFromCart, cart }) => {
 
     // Убираем дубликаты товаров из корзины
     const [addedItem, setAddedItem] = useState(true);
@@ -53,18 +53,13 @@ const Product = ({ product, onAddToCart, cart }) => {
 
                 {addedItem ?
                     <Button variant="primary" onClick={() => onAddToCart(product.id)}>
-                        <FontAwesomeIcon icon={faCartPlus} />
+                        Add to Cart <FontAwesomeIcon icon={ faCartPlus } />
                     </Button>
                     :
-                    <Button variant="danger">
-                        <FontAwesomeIcon icon={faCartPlus} />
+                    <Button variant="danger" onClick={() => onRemoveFromCart(product.id)}>
+                        Remove From Cart <FontAwesomeIcon icon={ faTrashAlt } />
                     </Button>
                 }
-
-                {/* из child элемента напрямую никак нельзя передать пропсы,
-                но можно вызвать функцию, которая в свою очередь поменяет state
-                у родительского компонента
-                */}
 
             </Card.Body>
         </Card>

@@ -12,15 +12,40 @@ function App() {
     // добавить возможность удаления товара из корзины
     // добавить возможность добавлять товар в корзину из компонента SingleProduct
 
-
+    // Задаем state продуктов
     const [products, setProducts] = useState([]);
-
+    
+    // Задаем state корзины
     const [cart, setCart] = useState([]);
+    
+    // Задаем state тотал эмаунт
+    const [totalAmount, setTotalAmount] = useState(0);
 
     // Добавляем товар в корзину
     const addToCart = id => {
         setCart([...cart, { id, count: 1, product: products.filter(product => product.id === id)[0] }]);
     }
+
+    const getTotalAmount = () => {
+        let sum = 0;
+        cart.forEach(cartItem => sum += +cartItem.product.price);
+        return sum;
+    }
+
+    const removeFromCart = id => {
+        setCart(cart.filter(item => item.id !== id));
+    }
+
+    const clearCart = () => {
+      setCart([]);  
+    }
+    
+    const increaseCount = id => {
+    // По клику в product.price нужно добавить новое значение,
+    // а именно : product.price * count (который внутри cart)
+      setCart(cart.map(item => item.id === id ? {...item, count: item.count+1 } : item ));
+    }
+
 
     useEffect(() => {
         setProducts([
@@ -67,11 +92,20 @@ function App() {
             },
 
         ])
-    }, [])
+
+        setTotalAmount(getTotalAmount());
+    }, [cart.length])
 
     return (
         <div className="main">
-            <Navigation products={products} cart={cart} onAddToCart={addToCart} />
+            <Navigation 
+            products={products} 
+            cart={cart} 
+            onAddToCart={addToCart} 
+            onRemoveFromCart={removeFromCart}
+            totalAmount={totalAmount}
+            clearCart={clearCart}
+            increaseCount={increaseCount} />
         </div>
     );
 
