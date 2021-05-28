@@ -23,7 +23,7 @@ function App() {
 
     // Добавляем товар в корзину
     const addToCart = id => {
-        setCart([...cart, { id, count: 1, product: products.filter(product => product.id === id)[0] }]);
+        setCart([...cart, { id, count: 1, cartPrice: +products.map(product => product.id === id ? +product.price : 0), product: products.filter(product => product.id === id)[0] }]);
     }
 
     const getTotalAmount = () => {
@@ -45,7 +45,11 @@ function App() {
         // а именно : product.price * count (который внутри cart)
 
         // изменить цену в продукте именно который в cart
-        setCart(cart.map(item => item.id === id ? { ...item, count: item.count + 1 } : item));
+        // setCart(cart.map(item => item.id === id ? { ...item, count: item.count + 1 } : item));
+
+        setCart(cart.map(item => item.id === id ? { ...item, count: item.count + 1, cartPrice: item.product.price * item.count } : item));
+
+
         // setCart(cart.map(item => item.id === id ? { ...item, product: 3 } : item));
         setProducts(products.map(product => product.id === id ? { ...product, price: (+product.price * +cart.map(cartItem => cartItem.id === id ? cartItem.count : '')) } : product));
     }

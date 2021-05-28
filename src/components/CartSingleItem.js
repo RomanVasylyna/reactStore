@@ -48,7 +48,8 @@ const CartSingleItem = ({ cartItem, increaseCount }) => {
                         <button style={amountBtn}>-</button>
                         <span style={amountSpan}>{cartItem.count}</span>
                         <button style={amountBtn} onClick={() => increaseCount(cartItem.id)}>+</button>
-                        <p style={cartPrice}>Price/Per Item : {cartItem.count * cartItem.product.price}$</p>
+                        <p style={cartPrice}>Price/Per Item : {cartItem.cartPrice}$</p>
+                        {/* cartItem.count * cartItem.product.price */}
                     </Col>
 
                 </Row>
