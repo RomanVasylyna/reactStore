@@ -4,7 +4,7 @@ import { Row, Col, Image } from 'react-bootstrap';
 const CartSingleItem = ({ cartItem, increaseCount }) => {
 
     // Умножаем price на counter
-console.log(cartItem.cartPrice);
+console.log(cartItem);
 
         // Some Styling
         const amountSpan = {
@@ -48,7 +48,7 @@ console.log(cartItem.cartPrice);
                         <button style={amountBtn}>-</button>
                         <span style={amountSpan}>{cartItem.count}</span>
                         <button style={amountBtn} onClick={() => increaseCount(cartItem.id)}>+</button>
-                        <p style={cartPrice}>Price/Per Item : {cartItem.cartPrice}$</p>
+                        <p style={cartPrice}>Price/Per Item : {0}$</p>
                         {/* cartItem.count * cartItem.product.price */}
                     </Col>
 
