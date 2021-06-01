@@ -23,12 +23,12 @@ function App() {
 
     // Добавляем товар в корзину
     const addToCart = id => {
-        setCart([...cart, { id, count: 1, cartPrice: products.map(product => product.id === id ? product.price : 0), product: products.filter(product => product.id === id)[0] }]);
+        setCart([...cart, { id, count: 1, cartPrice: products.map(product => product.id === id ? product.price : ''), product: products.filter(product => product.id === id)[0] }]);
     }
 
     const getTotalAmount = () => {
         let sum = 0;
-        cart.forEach(cartItem => sum += +cartItem.product.price);
+        cart.forEach(cartItem => sum += +cartItem.cartPrice);
         return sum;
     }
     
@@ -45,6 +45,9 @@ function App() {
     const increaseCount = id => {
         // Увеличиваем счетчик в корзине
         setCart(cart.map(item => item.id === id ? { ...item, count: item.count + 1, cartPrice: item.product.price * (item.count+1) } : item));
+        
+        // Каждый раз обновляем состояние totalAmount при ре-рендере
+        setTotalAmount(getTotalAmount());
         // Нужно взять price у продукта и умножить на counter из корзины
         // setProducts(products.filter(product => product.id === id ? { ...product, price: (+product.price * +cart.filter(cartItem => cartItem.id === id ? cartItem.count : '')) } : product));
     }
@@ -97,7 +100,7 @@ function App() {
         ])
 
         // Каждый раз обновляем состояние totalAmount при ре-рендере
-        setTotalAmount(getTotalAmount);
+        setTotalAmount(getTotalAmount());
 
     }, [cart.length]) //totalAmount
 
