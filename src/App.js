@@ -23,7 +23,8 @@ function App() {
 
     // Добавляем товар в корзину
     const addToCart = id => {
-        setCart([...cart, { id, count: 1, cartPrice: products.map(product => product.id === id ? product.name : null)[0], product: products.filter(product => product.id === id)[0] }]);
+        let productObj =  products.filter(product => product.id === id)[0];
+        setCart([...cart, { id, count: 1, cartPrice: productObj.price, product: productObj  }]);
     }
 
     const getTotalAmount = () => {
@@ -44,12 +45,20 @@ function App() {
 
     const increaseCount = id => {
         // Увеличиваем счетчик в корзине
+        // let productObj = cart.filter(item => item.id === id)[0].product.price;
         setCart(cart.map(item => item.id === id ? { ...item, count: item.count + 1, cartPrice: item.product.price * (item.count+1) } : item));
+        // setCart(cart.map(item => item.id === id ? {...item, count: item.count +1, product: {...item.product, price : item.product.price * (item.count+1)}} : item));
 
         // Каждый раз обновляем состояние totalAmount при ре-рендере
         setTotalAmount(getTotalAmount());
-        // Нужно взять price у продукта и умножить на counter из корзины
-        // setProducts(products.filter(product => product.id === id ? { ...product, price: (+product.price * +cart.filter(cartItem => cartItem.id === id ? cartItem.count : '')) } : product));
+    }
+
+    const decreaseCount = id => {
+        // Увеличиваем счетчик в корзине
+        setCart(cart.map(item => item.id === id ? { ...item, count: item.count == 2 ? item.count -1 : 1, cartPrice: item.product.price * (item.count+1) } : item));
+
+        // Каждый раз обновляем состояние totalAmount при ре-рендере
+        setTotalAmount(getTotalAmount());
     }
 
 
@@ -102,7 +111,7 @@ function App() {
         // Каждый раз обновляем состояние totalAmount при ре-рендере
         setTotalAmount(getTotalAmount());
 
-    }, [cart.length]) //totalAmount
+    }, [cart]) //totalAmount
 
     return (
         <div className="main">
@@ -113,7 +122,8 @@ function App() {
                 onRemoveFromCart={removeFromCart}
                 totalAmount={totalAmount}
                 clearCart={clearCart}
-                increaseCount={increaseCount} />
+                increaseCount={increaseCount}
+                decreaseCount={decreaseCount} />
         </div>
     );
 

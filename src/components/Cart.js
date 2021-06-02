@@ -4,7 +4,7 @@ import CartSingleItem from './CartSingleItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
-const Cart = ({ cart, totalAmount, clearCart, increaseCount }) => {
+const Cart = ({ cart, totalAmount, clearCart, increaseCount, decreaseCount }) => {
 
     return (
         <Container>
@@ -14,7 +14,7 @@ const Cart = ({ cart, totalAmount, clearCart, increaseCount }) => {
 
             <Col xs={12} md={12} xl={5}>
             { cart.length ?
-                cart.map(cartItem => <CartSingleItem key={cartItem.id} cartItem={cartItem} cart={cart} increaseCount={increaseCount}/>)
+                cart.map(cartItem => <CartSingleItem key={cartItem.id} cartItem={cartItem} cart={cart} increaseCount={increaseCount} decreaseCount={decreaseCount}/>)
                 : <p style={{ fontSize: '1.3rem' }}>Your Cart is empty...</p>
             }
             </Col>

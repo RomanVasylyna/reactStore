@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 
-const CartSingleItem = ({ cartItem, increaseCount }) => {
+const CartSingleItem = ({ cartItem, increaseCount, decreaseCount }) => {
 
     // Умножаем price на counter
 console.log(cartItem);
@@ -20,6 +20,16 @@ console.log(cartItem);
             border: 'none',
             backgroundColor: '#fff',
             fontSize: '1.5rem',
+
+        };
+
+        const blockedBtn = {
+            padding: '10px',
+            border: 'none',
+            backgroundColor: '#fff',
+            fontSize: '1.5rem',
+            color:'gray',
+            cursor: 'initial'
 
         };
 
@@ -45,11 +55,10 @@ console.log(cartItem);
                     <Col sm={3} md={6} style={{ textAlign: 'center' }}>
                         <p style={cartText}>{cartItem.product.name}</p>
                         <hr></hr>
-                        <button style={amountBtn}>-</button>
+                        <button style={ cartItem.count === 1 ? blockedBtn : amountBtn } onClick={ cartItem.count === 1 ? () => alert('You can\'t choose less than 1 item') : () => decreaseCount(cartItem.id)}>-</button>
                         <span style={amountSpan}>{cartItem.count}</span>
                         <button style={amountBtn} onClick={() => increaseCount(cartItem.id)}>+</button>
-                        <p style={cartPrice}>Price/Per Item : {0}$</p>
-                        {/* cartItem.count * cartItem.product.price */}
+                        <p style={cartPrice}>Price/Per Item : {cartItem.cartPrice.toFixed(2)}$</p>
                     </Col>
 
                 </Row>
