@@ -5,13 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LinkContainer } from 'react-router-bootstrap';
 import { faCartPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Link
-} from "react-router-dom";
-
 
 const Product = ({ product, onAddToCart, onRemoveFromCart, cart }) => {
 
@@ -53,11 +46,11 @@ const Product = ({ product, onAddToCart, onRemoveFromCart, cart }) => {
 
                 {addedItem ?
                     <Button variant="primary" onClick={() => onAddToCart(product.id)}>
-                        Add to Cart <FontAwesomeIcon icon={ faCartPlus } />
+                        Add to Cart <FontAwesomeIcon icon={faCartPlus} />
                     </Button>
                     :
                     <Button variant="danger" onClick={() => onRemoveFromCart(product.id)}>
-                        Remove From Cart <FontAwesomeIcon icon={ faTrashAlt } />
+                        Remove From Cart <FontAwesomeIcon icon={faTrashAlt} />
                     </Button>
                 }
 

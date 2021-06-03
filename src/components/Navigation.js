@@ -70,7 +70,7 @@ const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount
           </Route>
 
           <Route path="/product/:id">
-            <SingleProduct products={products} />
+            <SingleProduct products={products} onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart} cart={cart} />
           </Route>
 
           <Route path="/cart">

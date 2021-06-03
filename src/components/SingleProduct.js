@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 
-const SingleProduct = ({ products }) => {
+const SingleProduct = ({ products, onAddToCart, onRemoveFromCart, cart }) => {
 
     let { id } = useParams(); // Параметр с id продукта который мы получаем от роута
-    console.log(id);
 
     let [product, setProduct] = useState([]);
 
+    // Убираем дубликаты товаров из корзины
+    const [addedItem, setAddedItem] = useState(true);
 
     useEffect(() => {
         setProduct(products.filter(product => product.id == id)[0]);
-        console.log(setProduct);
-    }, [])
+        setAddedItem(!cart.filter(cartItem => cartItem.id === product.id).length);
+    }, [product.length, cart]);
 
 
     return (
@@ -32,7 +33,13 @@ const SingleProduct = ({ products }) => {
 
                 <Col sm={7} style={{ marginTop: '50px' }}>
                     <p style={{ fontSize: '1.3em' }}>{product.description}</p>
-                    <Button><FontAwesomeIcon icon={faCartPlus} /></Button>
+
+                    {addedItem ?
+                        <Button onClick={() => onAddToCart(product.id)}>Add To Cart <FontAwesomeIcon icon={faCartPlus} /></Button>
+                        :
+                        <Button variant="danger" onClick={() => onRemoveFromCart(product.id)}>Remove From Cart <FontAwesomeIcon icon={faTrashAlt} /></Button>
+                    }
+
                 </Col>
 
             </Row>
