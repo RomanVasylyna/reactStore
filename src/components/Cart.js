@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CartSingleItem from './CartSingleItem';
+import Location from './Location';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,7 +22,8 @@ const Cart = ({ cart, totalAmount, clearCart, increaseCount, decreaseCount }) =>
 
             { cart.length ?
             <Col xs={12} md={4} xl={7} style={{ textAlign: 'center' }}>
-                <h3>Total : {totalAmount} $</h3>
+                <Location/>
+                <h3 style={{ marginTop: '50px' }}>Total : {totalAmount} $</h3>
                 <Button variant="danger" onClick={() => clearCart()}>Clear Cart <FontAwesomeIcon icon={ faTrashAlt } /></Button>
             </Col>
             : ''
