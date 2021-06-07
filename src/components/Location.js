@@ -11,16 +11,14 @@ const Location = () => {
     let [selectedCountry, setSelectedCountry] = useState('');
     let [selectedCity, setSelectedCity] = useState('');
 
-    let [countryCode, setCountryCode] = useState('');
-
     useEffect(() => {
         setCountries(csc.getAllCountries());
-        console.log(cities);
-    }, [countries, cities, countryCode]);
+    }, [countries, cities]);
 
-    const getCities = countryCode => {
-    setCountryCode(countryCode);
-    cities.map(city => city.countryCode === countryCode ? console.log(city) : ''); 
+    const getCities = (countryCode, countryName) => {
+        setSelectedCountry(countryName);
+        setCities(csc.getCitiesOfCountry(countryCode));
+        setSelectedCity('');
     }
 
     return (
@@ -31,11 +29,12 @@ const Location = () => {
             {/* Countries Select */}
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Country</Form.Label>
-                <Form.Control as="select" onChange={e => getCities(e.currentTarget.value)}>
+                <Form.Control as="select" onChange={e => getCities(e.currentTarget.value, e.currentTarget.getAttribute(name))}>
                     <option value="">Please Select Your Country</option>
                     {countries.map(country =>
                         <option
                             key={country.phonecode + country.name}
+                            name={country.name}
                             value={country.isoCode}>
                             {country.name}
                         </option>
@@ -47,10 +46,10 @@ const Location = () => {
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>City</Form.Label>
                 <Form.Control as="select" onChange={e => setSelectedCity(e.currentTarget.value)}>
-                <option value="">Please Select Your City</option>
-                    { cities.map(city =>
+                    <option value="">Please Select Your City</option>
+                    {cities.map((city, index) =>
                         <option
-                            key={city.name}
+                            key={index}
                             value={city.name}>
                             {city.name}
                         </option>)
