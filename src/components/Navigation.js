@@ -63,10 +63,10 @@ const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount
 
           <Route path="/products">
             <Products
-            products={ products }
-            onAddToCart={ onAddToCart }
-            cart={ cart }
-            onRemoveFromCart={ onRemoveFromCart }/>
+              products={products}
+              onAddToCart={onAddToCart}
+              cart={cart}
+              onRemoveFromCart={onRemoveFromCart} />
           </Route>
 
           <Route path="/product/:id">
@@ -75,11 +75,11 @@ const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount
 
           <Route path="/cart">
             <Cart
-            cart={cart}
-            totalAmount={totalAmount}
-            clearCart={clearCart}
-            increaseCount={increaseCount}
-            decreaseCount={decreaseCount}/>
+              cart={cart}
+              totalAmount={totalAmount}
+              clearCart={clearCart}
+              increaseCount={increaseCount}
+              decreaseCount={decreaseCount} />
           </Route>
 
 

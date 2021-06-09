@@ -15,9 +15,8 @@ const Location = () => {
         setCountries(csc.getAllCountries());
     }, [countries, cities]);
 
-    const getCities = (countryCode, countryName) => {
-        // setSelectedCountry(countryName);
-        console.log(countryName);
+    const getCities = (countryCode) => {
+        setSelectedCountry(csc.getCountryByCode(countryCode).name);
         setCities(csc.getCitiesOfCountry(countryCode));
         setSelectedCity('');
     }
@@ -30,7 +29,7 @@ const Location = () => {
             {/* Countries Select */}
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Country</Form.Label>
-                <Form.Control as="select" onChange={e => getCities(e.currentTarget.value, e.currentTarget.getAttribute('name'))}>
+                <Form.Control as="select" onChange={e => getCities(e.currentTarget.value)}>
                     <option value="">Please Select Your Country</option>
                     {countries.map(country =>
                         <option

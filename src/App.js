@@ -63,7 +63,7 @@ function App() {
     }, [cart]) //totalAmount
 
     return (
-        <div className="main">
+        <div className="main bg-light">
             <Navigation
                 products={products}
                 cart={cart}
