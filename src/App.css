@@ -4,11 +4,11 @@
 
 /* Меняем бэкграунд у приложения при помощи Rect Context*/
  .bg-light{
-  background:'gray' !important;  
+  background:'yellow' !important;
   }
-  
+
   .bg-dark{
-  background:'black' !important;  
+  background:'black' !important;
   }
 
 /* Product.js */
