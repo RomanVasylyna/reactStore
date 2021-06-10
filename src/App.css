@@ -3,12 +3,12 @@
 }
 
 /* Меняем бэкграунд у приложения при помощи Rect Context*/
- .bg-light{
-  background:'yellow' !important;
+ .custom{
+  background:'red' !important;
   }
 
   .bg-dark{
-  background:'black' !important;
+  background:'purple' !important;
   }
 
 /* Product.js */

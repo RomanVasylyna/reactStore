@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Button } from 'react-bootstrap';
 import ThemeContext from './ThemeContext';
 
 const Theme = () => {
+    let {theme, setTheme} = useContext(ThemeContext);
+
     return (
-    <Button>Change Theme</Button>
+    <Button variant="danger" onClick={() => setTheme('bg-danger')}>Change Theme</Button>
     )
 }
 

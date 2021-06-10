@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,8 @@ import SingleProduct from './SingleProduct';
 import Home from './Home';
 import About from './About';
 import Cart from './Cart';
+import ThemeContext from '../ThemeContext';
+import Theme from '../Theme';
 
 // Importing Router
 import {
@@ -18,8 +20,11 @@ import {
 
 const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount, clearCart, increaseCount, decreaseCount }) => {
 
+const [theme, setTheme] = useState('bg-light');
+
   return (
     <Router>
+    <ThemeContext.Provider value={theme, setTheme}/>
       <div>
         <Navbar bg="light" expand="lg">
           <Navbar.Brand href="/">My Shop</Navbar.Brand>
@@ -38,6 +43,8 @@ const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount
               <LinkContainer to="/products">
                 <Nav.Link>Products</Nav.Link>
               </LinkContainer>
+
+              <Theme/>
 
             </Nav>
 

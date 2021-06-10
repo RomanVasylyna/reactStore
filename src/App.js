@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './components/Navigation';
 import Products from './Products';
 
-
 function App() {
 
     // Задаем state продуктов
@@ -63,7 +62,7 @@ function App() {
     }, [cart]) //totalAmount
 
     return (
-        <div className="main bg-light">
+        <div className={`main ${theme}`}>
             <Navigation
                 products={products}
                 cart={cart}
