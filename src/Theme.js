@@ -6,7 +6,7 @@ const Theme = () => {
     let {theme, setTheme} = useContext(ThemeContext);
 
     return (
-    <Button variant="danger" onClick={() => setTheme('bg-danger')}>Change Theme</Button>
+    <Button variant="danger" onClick={() => setTheme('bg-danger')}>{`current:${theme} Change Theme`}</Button>
     )
 }
 

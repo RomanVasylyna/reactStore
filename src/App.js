@@ -3,8 +3,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './components/Navigation';
 import Products from './Products';
+import ThemeContext from './ThemeContext';
 
 function App() {
+
+    // Используем контекст апи для смены темы
+    const [theme, setTheme] = useState('bg-light');
 
     // Задаем state продуктов
     const [products, setProducts] = useState([]);
@@ -63,6 +67,7 @@ function App() {
 
     return (
         <div className={`main ${theme}`}>
+            <ThemeContext.Provider value={theme, setTheme}>
             <Navigation
                 products={products}
                 cart={cart}
@@ -71,7 +76,9 @@ function App() {
                 totalAmount={totalAmount}
                 clearCart={clearCart}
                 increaseCount={increaseCount}
-                decreaseCount={decreaseCount} />
+                decreaseCount={decreaseCount}
+                />
+                </ThemeContext.Provider>
         </div>
     );
 

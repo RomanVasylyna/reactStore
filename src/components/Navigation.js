@@ -8,7 +8,6 @@ import SingleProduct from './SingleProduct';
 import Home from './Home';
 import About from './About';
 import Cart from './Cart';
-import ThemeContext from '../ThemeContext';
 import Theme from '../Theme';
 
 // Importing Router
@@ -20,11 +19,8 @@ import {
 
 const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount, clearCart, increaseCount, decreaseCount }) => {
 
-const [theme, setTheme] = useState('bg-light');
-
   return (
     <Router>
-    <ThemeContext.Provider value={theme, setTheme}/>
       <div>
         <Navbar bg="light" expand="lg">
           <Navbar.Brand href="/">My Shop</Navbar.Brand>
@@ -44,6 +40,7 @@ const [theme, setTheme] = useState('bg-light');
                 <Nav.Link>Products</Nav.Link>
               </LinkContainer>
 
+              {/* Меняем тему  приложения при помощи контекста */}
               <Theme/>
 
             </Nav>
