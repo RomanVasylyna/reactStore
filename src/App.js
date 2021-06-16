@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './components/Navigation';
-import Products from './Products';
+import Products from './products';
 // import ThemeContext from './ThemeContext';
 
 // При помощи функции connect() мы соединяем компонент с Redux store
 import { connect } from 'react-redux';
 // Импортируем экшны
-import { setNewProducts, addItemToCart } from './components/store/actions';
+import { setProducts, addItemToCart } from './components/store/actions';
 
 function App() {
 
@@ -16,7 +16,7 @@ function App() {
     // const [theme, setTheme] = useState('bg-light');
 
     // Задаем state продуктов
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
     // Задаем state корзины
     const [cart, setCart] = useState([]);
@@ -26,8 +26,11 @@ function App() {
 
     // Добавляем товар в корзину
     const addToCart = id => {
-        let productObj =  products.filter(product => product.id === id)[0];
-        setCart([...cart, { id, count: 1, cartPrice: productObj.price, product: productObj  }]);
+        let newProduct = products.filter(product => product.id === id)[0];
+        // меняем store при помощи пропсов из mapStateToProps а также dispatch
+        this.props.dispatch(addItemToCart({ id, count: 1, cartPrice: newProduct.price, product: newProduct}));
+
+        // setCart([...cart, { id, count: 1, cartPrice: newProduct.price, product: newProduct  }]);
     }
 
     const getTotalAmount = () => {
@@ -63,7 +66,9 @@ function App() {
 
     useEffect(() => {
         // Берем массив из отдельного компонента
-        setProducts(Products());
+        // setProducts(Products());
+
+        this.props.dispatch(setProducts(Products()));
 
         // Каждый раз обновляем состояние totalAmount при ре-рендере
         setTotalAmount(getTotalAmount());

@@ -1,6 +1,6 @@
 import constants from "./actionTypes";
 
-export const setNewProducts = data => ({
+export const setProducts = data => ({
     type: constants.SET_PRODUCTS,
     payload: data
 });
