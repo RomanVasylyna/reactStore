@@ -8,7 +8,7 @@ import SingleProduct from './SingleProduct';
 import Home from './Home';
 import About from './About';
 import Cart from './Cart';
-import Theme from '../Theme';
+// import Theme from '../Theme';
 
 // Importing Router
 import {
@@ -41,7 +41,7 @@ const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount
               </LinkContainer>
 
               {/* Меняем тему  приложения при помощи контекста */}
-              <Theme/>
+              {/* <Theme/> */}
 
             </Nav>
 

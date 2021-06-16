@@ -3,12 +3,17 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './components/Navigation';
 import Products from './Products';
-import ThemeContext from './ThemeContext';
+// import ThemeContext from './ThemeContext';
+
+// При помощи функции connect() мы соединяем компонент с Redux store
+import { connect } from 'react-redux';
+// Импортируем экшны
+import { setNewProducts, addItemToCart } from './components/store/actions';
 
 function App() {
 
     // Используем контекст апи для смены темы
-    const [theme, setTheme] = useState('bg-light');
+    // const [theme, setTheme] = useState('bg-light');
 
     // Задаем state продуктов
     const [products, setProducts] = useState([]);
@@ -66,8 +71,8 @@ function App() {
     }, [cart]) //totalAmount
 
     return (
-        <div className={`main ${theme}`}>
-            <ThemeContext.Provider value={theme, setTheme}>
+        <div className={`main bg-light`}>
+            {/* <ThemeContext.Provider value={theme, setTheme}> */}
             <Navigation
                 products={products}
                 cart={cart}
@@ -78,12 +83,20 @@ function App() {
                 increaseCount={increaseCount}
                 decreaseCount={decreaseCount}
                 />
-                </ThemeContext.Provider>
+                {/* </ThemeContext.Provider> */}
         </div>
     );
 
 }
 
+// Для того чтобы получить конкретный элемент из стора мы мапим стор при помощи
+// mapStateToProps и таким образом тот элемент который нам нужно вытянуть из стора
+// передается посредствам пропсов
+const mapStateToProps = state => ({
+products: state.products,
+cart: state.cart
+});
 
 
-export default App;
+
+export default connect(mapStateToProps)(App);
