@@ -4,7 +4,7 @@ import { Row, Col, Image } from 'react-bootstrap';
 const CartSingleItem = ({ cartItem, increaseCount, decreaseCount }) => {
 
     // Умножаем price на counter
-    console.log(cartItem);
+    // console.log(cartItem);
 
     // Some Styling
     const amountSpan = {

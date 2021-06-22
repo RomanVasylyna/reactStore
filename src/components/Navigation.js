@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,6 @@ import SingleProduct from './SingleProduct';
 import Home from './Home';
 import About from './About';
 import Cart from './Cart';
-// import Theme from '../Theme';
 
 // Importing Router
 import {
@@ -17,7 +16,7 @@ import {
   Route
 } from "react-router-dom";
 
-const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount, clearCart, increaseCount, decreaseCount }) => {
+const Navigation = () => {
 
   return (
     <Router>
@@ -39,9 +38,6 @@ const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount
               <LinkContainer to="/products">
                 <Nav.Link>Products</Nav.Link>
               </LinkContainer>
-
-              {/* Меняем тему  приложения при помощи контекста */}
-              {/* <Theme/> */}
 
             </Nav>
 
@@ -66,27 +62,16 @@ const Navigation = ({ products, cart, onAddToCart, onRemoveFromCart, totalAmount
           </Route>
 
           <Route path="/products">
-            <Products
-              products={products}
-              onAddToCart={onAddToCart}
-              cart={cart}
-              onRemoveFromCart={onRemoveFromCart} />
+            <Products />
           </Route>
 
           <Route path="/product/:id">
-            <SingleProduct products={products} onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart} cart={cart} />
+            <SingleProduct/>
           </Route>
 
           <Route path="/cart">
-            <Cart
-              cart={cart}
-              totalAmount={totalAmount}
-              clearCart={clearCart}
-              increaseCount={increaseCount}
-              decreaseCount={decreaseCount} />
+            <Cart/>
           </Route>
-
-
 
         </Switch>
       </div>

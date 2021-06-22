@@ -1,24 +1,25 @@
 import React from 'react';
 import Product from './Product';
 import { Container, Row } from 'react-bootstrap';
-// import Hello from './Hello';
+import { connect } from 'react-redux';
 
-const Products = ({ products, onAddToCart, onRemoveFromCart, cart }) => {
+const Products = (props) => {
 
     return (
         <Container>
-        {/* Studying useRef hook <Hello/> */}
+            {/* Studying useRef hook <Hello/> */}
             <Row style={{ marginTop: '20px', marginBottom: '20px' }}>
-                {products.map(product =>
-                    <Product key={product.id}
-                        onAddToCart={onAddToCart}
-                        product={product}
-                        cart={cart}
-                        onRemoveFromCart={onRemoveFromCart} />
+                {props.products.map(product =>
+                    <Product product={product} key={product.id}/>
                 )}
             </Row>
         </Container>
     )
 }
 
-export default Products
+const mapStateToProps = state => ({
+    products: state.products,
+    cart: state.cart
+});
+
+export default connect(mapStateToProps)(Products);

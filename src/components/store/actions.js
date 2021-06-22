@@ -9,3 +9,8 @@ export const addItemToCart = product => ({
     type: constants.ADD_TO_CART,
     payload: product
 });
+
+export const removeItemFromCart = product => ({
+    type: constants.REMOVE_FROM_CART,
+    payload: product
+});

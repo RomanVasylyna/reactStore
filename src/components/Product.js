@@ -4,39 +4,41 @@ import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LinkContainer } from 'react-router-bootstrap';
 import { faCartPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+// Импортируем экшн на удаление товара из корзины
+import { addItemToCart, removeItemFromCart } from '../components/store/actions';
 
-
-const Product = ({ product, onAddToCart, onRemoveFromCart, cart }) => {
-
-    // Убираем дубликаты товаров из корзины
-    const [addedItem, setAddedItem] = useState(true);
-
-    useEffect(() => {
-        setAddedItem(!cart.filter(cartItem => cartItem.id === product.id).length);
-    }, [cart]);
+const Product = (props) => {
 
     // Styling
-
     const productCard = {
         width: '22rem',
         margin: '10px',
     }
+
+    //Убираем дубликаты товаров из корзины
+    const [addedItem, setAddedItem] = useState(true);
+
+    useEffect(() => {
+        setAddedItem(!props.cart.filter(cartItem => cartItem.id === props.product.id).length);
+    }, [props.cart]);
+
 
     return (
 
         <Card style={productCard}>
 
             {/* Link */}
-            <LinkContainer to={`/product/${product.id}`} style={{ cursor: 'pointer' }}>
-                <Card.Img variant="top" src={product.imgSrc} />
+            <LinkContainer to={`/product/${props.product.id}`} style={{ cursor: 'pointer' }}>
+                <Card.Img variant="top" src={props.product.imgSrc} />
             </LinkContainer>
 
             <Card.Body className="productCardBody">
                 <Card.Title>
 
                     {/* Link */}
-                    <LinkContainer to={`/product/${product.id}`} className="productLink">
-                        <p>{product.brand} {product.name} ({product.price}$)</p>
+                    <LinkContainer to={`/product/${props.product.id}`} className="productLink">
+                        <p>{props.product.brand} {props.product.name} ({props.product.price}$)</p>
                     </LinkContainer>
 
                 </Card.Title>
@@ -44,12 +46,15 @@ const Product = ({ product, onAddToCart, onRemoveFromCart, cart }) => {
                     Описание Товара
                 </Card.Text>
 
+                {/* onClick={() => onAddToCart(product.id)} */}
+                {/* onClick={() => onRemoveFromCart(product.id)} */}
+
                 {addedItem ?
-                    <Button variant="primary" onClick={() => onAddToCart(product.id)}>
+                    <Button variant="primary">
                         Add to Cart <FontAwesomeIcon icon={faCartPlus} />
                     </Button>
                     :
-                    <Button variant="danger" onClick={() => onRemoveFromCart(product.id)}>
+                    <Button variant="danger">
                         Remove From Cart <FontAwesomeIcon icon={faTrashAlt} />
                     </Button>
                 }
@@ -61,4 +66,74 @@ const Product = ({ product, onAddToCart, onRemoveFromCart, cart }) => {
     )
 }
 
-export default Product
+const mapStateToProps = (state, ownProps) => {
+    const singleProduct = ownProps.product;
+    return {
+        cart: state.cart,
+        products: state.products,
+        product: singleProduct
+    }
+};
+
+
+export default connect()(Product);
+
+    // Убираем дубликаты товаров из корзины
+//     const [addedItem, setAddedItem] = useState(true);
+
+//     useEffect(() => {
+//         setAddedItem(!props.cart.filter(cartItem => cartItem.id === product.id).length);
+//     }, [props.cart]);
+
+//     // Styling
+//     const productCard = {
+//         width: '22rem',
+//         margin: '10px',
+//     }
+
+//     return (
+
+//         <Card style={productCard}>
+
+//             {/* Link */}
+//             <LinkContainer to={`/product/${product.id}`} style={{ cursor: 'pointer' }}>
+//                 <Card.Img variant="top" src={product.imgSrc} />
+//             </LinkContainer>
+
+//             <Card.Body className="productCardBody">
+//                 <Card.Title>
+
+//                     {/* Link */}
+//                     <LinkContainer to={`/product/${product.id}`} className="productLink">
+//                         <p>{product.brand} {product.name} ({product.price}$)</p>
+//                     </LinkContainer>
+
+//                 </Card.Title>
+//                 <Card.Text>
+//                     Описание Товара
+//                 </Card.Text>
+
+//                 {/* onClick={() => onAddToCart(product.id)} */}
+//                 {/* onClick={() => onRemoveFromCart(product.id)} */}
+
+//                 {addedItem ?
+//                     <Button variant="primary">
+//                         Add to Cart <FontAwesomeIcon icon={faCartPlus} />
+//                     </Button>
+//                     :
+//                     <Button variant="danger">
+//                         Remove From Cart <FontAwesomeIcon icon={faTrashAlt} />
+//                     </Button>
+//                 }
+
+//             </Card.Body>
+//         </Card>
+
+
+//     )
+// }
+
+// const mapStateToProps = state => ({
+//     products: state.products,
+//     cart: state.cart
+// });

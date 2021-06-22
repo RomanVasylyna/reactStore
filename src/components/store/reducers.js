@@ -17,6 +17,7 @@ const rootReducer = (state = initialState, action) => {
         // экшн SET_PRODUCTS по-сути равен записи  const [products, setProducts] = useState([]);
         // только вместо обычного хука useState в рамках одного компонента мы задаем state вообще во всем сторе
         case constants.SET_PRODUCTS:
+            console.log(action.payload);
             return {
                 ...state, products: action.payload
             }
@@ -24,6 +25,11 @@ const rootReducer = (state = initialState, action) => {
             console.log(action.payload);
             return {
                 ...state, cart: [...state.cart, action.payload]
+            }
+        case constants.REMOVE_FROM_CART:
+            console.log(action.payload);
+            return {
+                ...state, cart: state.cart.filter(item => action.payload !== action.payload)
             }
         // Дефолтный кейс, просто возвращаем дефолтный стейт
         default:
