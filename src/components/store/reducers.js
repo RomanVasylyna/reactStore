@@ -29,7 +29,7 @@ const rootReducer = (state = initialState, action) => {
         case constants.REMOVE_FROM_CART:
             console.log(action.payload);
             return {
-                ...state, cart: state.cart.filter(item => action.payload !== action.payload)
+                ...state, cart: state.cart.filter(item => item.id !== action.payload)
             }
         // Дефолтный кейс, просто возвращаем дефолтный стейт
         default:

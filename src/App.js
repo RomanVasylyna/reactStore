@@ -18,10 +18,10 @@ function App(props) {
     const [totalAmount, setTotalAmount] = useState(0);
 
     // Добавляем товар в корзину
-    const addToCart = id => {
-        let newProduct = props.products.filter(product => product.id === id)[0];
-        props.dispatch(addItemToCart({ id, count: 1, cartPrice: newProduct.price, product: newProduct }));
-    }
+    // const addToCart = id => {
+    //     let newProduct = props.products.filter(product => product.id === id)[0];
+    //     props.dispatch(addItemToCart({ id, count: 1, cartPrice: newProduct.price, product: newProduct }));
+    // }
 
     // const getTotalAmount = () => {
     //     let sum = 0;
@@ -30,10 +30,10 @@ function App(props) {
     // }
 
     // Удаляем продукт из корзины
-    const removeFromCart = id => {
-        props.dispatch(removeItemFromCart(props.cart.filter(item => item.id !== id)))
-        // setCart(cart.filter(item => item.id !== id));
-    }
+    // const removeFromCart = id => {
+    //     props.dispatch(removeItemFromCart(props.cart.filter(item => item.id !== id)))
+    //     setCart(cart.filter(item => item.id !== id));
+    // }
 
     // Очищаем корзину
     // const clearCart = () => {
@@ -54,7 +54,6 @@ function App(props) {
     //     setTotalAmount(getTotalAmount());
     // }
 
-
     useEffect(() => {
         // Задаем дефолтные продукты в store
         props.dispatch(setProducts(productsData()));
@@ -62,7 +61,7 @@ function App(props) {
         // Каждый раз обновляем состояние totalAmount при ре-рендере
         // setTotalAmount(getTotalAmount());
 
-    }, [props.cart]) //totalAmount
+    }, []) //totalAmount
 
     return (
         <div className={`main bg-light`}>

@@ -10,7 +10,7 @@ export const addItemToCart = product => ({
     payload: product
 });
 
-export const removeItemFromCart = product => ({
+export const removeItemFromCart = productId => ({
     type: constants.REMOVE_FROM_CART,
-    payload: product
+    payload: productId
 });

@@ -3,20 +3,24 @@ import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addItemToCart, removeItemFromCart } from '../components/store/actions';
 
-const SingleProduct = ({ products, onAddToCart, onRemoveFromCart, cart }) => {
-
-    let { id } = useParams(); // Параметр с id продукта который мы получаем от роута
-
-    let [product, setProduct] = useState([]);
+const SingleProduct = (props) => {
+    
+    // Параметр с id продукта который мы получаем от роута
+    let { id } = useParams(); 
+    
+    // Получаем текущий продукт и загоняем его в state компонента
+    let [product, setProduct] = useState({});
 
     // Убираем дубликаты товаров из корзины
     const [addedItem, setAddedItem] = useState(true);
 
     useEffect(() => {
-        setProduct(products.filter(product => product.id == id)[0]);
-        setAddedItem(!cart.filter(cartItem => cartItem.id === product.id).length);
-    }, [product.length, cart]);
+        setProduct(props.products.filter(product => product.id == id)[0]);
+        setAddedItem(!props.cart.filter(cartItem => cartItem.id === product.id).length);
+    }, [props.cart]);
 
 
     return (
@@ -34,10 +38,10 @@ const SingleProduct = ({ products, onAddToCart, onRemoveFromCart, cart }) => {
                 <Col sm={7} style={{ marginTop: '50px' }}>
                     <p style={{ fontSize: '1.3em' }}>{product.description}</p>
 
-                    {addedItem ?
-                        <Button onClick={() => onAddToCart(product.id)}>Add To Cart <FontAwesomeIcon icon={faCartPlus} /></Button>
+                    { addedItem ?
+                        <Button onClick={() => props.dispatch(addItemToCart(product))}>Add To Cart <FontAwesomeIcon icon={faCartPlus} /></Button>
                         :
-                        <Button variant="danger" onClick={() => onRemoveFromCart(product.id)}>Remove From Cart <FontAwesomeIcon icon={faTrashAlt} /></Button>
+                        <Button variant="danger" onClick={() => props.dispatch(removeItemFromCart(product.id))}>Remove From Cart <FontAwesomeIcon icon={faTrashAlt} /></Button>
                     }
 
                 </Col>
@@ -47,4 +51,11 @@ const SingleProduct = ({ products, onAddToCart, onRemoveFromCart, cart }) => {
     )
 }
 
-export default SingleProduct
+const mapStateToProps = state => {
+    return {
+        products: state.products,
+        cart: state.cart
+    }
+}
+
+export default connect(mapStateToProps)(SingleProduct);

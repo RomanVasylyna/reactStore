@@ -46,15 +46,13 @@ const Product = (props) => {
                     Описание Товара
                 </Card.Text>
 
-                {/* onClick={() => onAddToCart(product.id)} */}
-                {/* onClick={() => onRemoveFromCart(product.id)} */}
 
                 {addedItem ?
-                    <Button variant="primary">
+                    <Button variant="primary" onClick={() => props.dispatch(addItemToCart(props.product))}>
                         Add to Cart <FontAwesomeIcon icon={faCartPlus} />
                     </Button>
                     :
-                    <Button variant="danger">
+                    <Button variant="danger" onClick={() => props.dispatch(removeItemFromCart(props.product.id))}>
                         Remove From Cart <FontAwesomeIcon icon={faTrashAlt} />
                     </Button>
                 }
@@ -67,73 +65,12 @@ const Product = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const singleProduct = ownProps.product;
     return {
         cart: state.cart,
         products: state.products,
-        product: singleProduct
+        product: ownProps.product
     }
 };
 
 
-export default connect()(Product);
-
-    // Убираем дубликаты товаров из корзины
-//     const [addedItem, setAddedItem] = useState(true);
-
-//     useEffect(() => {
-//         setAddedItem(!props.cart.filter(cartItem => cartItem.id === product.id).length);
-//     }, [props.cart]);
-
-//     // Styling
-//     const productCard = {
-//         width: '22rem',
-//         margin: '10px',
-//     }
-
-//     return (
-
-//         <Card style={productCard}>
-
-//             {/* Link */}
-//             <LinkContainer to={`/product/${product.id}`} style={{ cursor: 'pointer' }}>
-//                 <Card.Img variant="top" src={product.imgSrc} />
-//             </LinkContainer>
-
-//             <Card.Body className="productCardBody">
-//                 <Card.Title>
-
-//                     {/* Link */}
-//                     <LinkContainer to={`/product/${product.id}`} className="productLink">
-//                         <p>{product.brand} {product.name} ({product.price}$)</p>
-//                     </LinkContainer>
-
-//                 </Card.Title>
-//                 <Card.Text>
-//                     Описание Товара
-//                 </Card.Text>
-
-//                 {/* onClick={() => onAddToCart(product.id)} */}
-//                 {/* onClick={() => onRemoveFromCart(product.id)} */}
-
-//                 {addedItem ?
-//                     <Button variant="primary">
-//                         Add to Cart <FontAwesomeIcon icon={faCartPlus} />
-//                     </Button>
-//                     :
-//                     <Button variant="danger">
-//                         Remove From Cart <FontAwesomeIcon icon={faTrashAlt} />
-//                     </Button>
-//                 }
-
-//             </Card.Body>
-//         </Card>
-
-
-//     )
-// }
-
-// const mapStateToProps = state => ({
-//     products: state.products,
-//     cart: state.cart
-// });
+export default connect(mapStateToProps)(Product);
