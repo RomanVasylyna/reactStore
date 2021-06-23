@@ -5,7 +5,7 @@ import constants from "./actionTypes";
 const initialState = {
     // По-умолчанию как продукты так и корзина пусты
     products: [],
-    cart: []
+    cart: [],
 }
 
 // Создаем редьюсер, который являет собой switch case где условиями являются типы экшнов

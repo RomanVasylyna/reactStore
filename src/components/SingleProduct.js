@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 import { addItemToCart, removeItemFromCart } from '../components/store/actions';
 
 const SingleProduct = (props) => {
-    
+
     // Параметр с id продукта который мы получаем от роута
-    let { id } = useParams(); 
-    
+    let { id } = useParams();
+
     // Получаем текущий продукт и загоняем его в state компонента
     let [product, setProduct] = useState({});
 
@@ -18,9 +18,11 @@ const SingleProduct = (props) => {
     const [addedItem, setAddedItem] = useState(true);
 
     useEffect(() => {
+        // Определяем текущий продукт
         setProduct(props.products.filter(product => product.id == id)[0]);
+        // Убираем дубликаты из корзины
         setAddedItem(!props.cart.filter(cartItem => cartItem.id === product.id).length);
-    }, [props.cart]);
+    }, [product, props.cart]);
 
 
     return (
@@ -39,9 +41,13 @@ const SingleProduct = (props) => {
                     <p style={{ fontSize: '1.3em' }}>{product.description}</p>
 
                     { addedItem ?
-                        <Button onClick={() => props.dispatch(addItemToCart(product))}>Add To Cart <FontAwesomeIcon icon={faCartPlus} /></Button>
+                        <Button onClick={() => props.dispatch(addItemToCart(product))}>
+                            Add To Cart <FontAwesomeIcon icon={faCartPlus} />
+                        </Button>
                         :
-                        <Button variant="danger" onClick={() => props.dispatch(removeItemFromCart(product.id))}>Remove From Cart <FontAwesomeIcon icon={faTrashAlt} /></Button>
+                        <Button variant="danger" onClick={() => props.dispatch(removeItemFromCart(product.id))}>
+                            Remove From Cart <FontAwesomeIcon icon={faTrashAlt} />
+                        </Button>
                     }
 
                 </Col>

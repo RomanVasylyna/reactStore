@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import counterStyling from '../App.css';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +9,7 @@ import SingleProduct from './SingleProduct';
 import Home from './Home';
 import About from './About';
 import Cart from './Cart';
+import { connect } from 'react-redux';
 
 // Importing Router
 import {
@@ -16,7 +18,20 @@ import {
   Route
 } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = (props) => {
+
+  // Стили для счетчика корзины
+  const counterStyling = {
+    backgroundColor: 'gray',
+    color: '#fff',
+    padding:'0px 7px',
+    borderRadius: '50%',
+    fontWeight: 'bold',
+    position: 'absolute',
+    left: '1.4vw',
+    bottom: '20px'
+  };
+
 
   return (
     <Router>
@@ -42,8 +57,8 @@ const Navigation = () => {
             </Nav>
 
             <Nav>
-              <LinkContainer to="/cart">
-                <Nav.Link><FontAwesomeIcon icon={faShoppingCart} /></Nav.Link>
+              <LinkContainer to="/cart" style={{ position:'relative' }}>
+                <Nav.Link><span style={counterStyling}>{props.cart.length}</span><FontAwesomeIcon icon={faShoppingCart} style={{ fontSize: '1.3rem'}}/></Nav.Link>
               </LinkContainer>
             </Nav>
 
@@ -79,4 +94,11 @@ const Navigation = () => {
   )
 }
 
-export default Navigation
+const mapStateToProps = state => {
+  return {
+      products: state.products,
+      cart: state.cart
+  }
+}
+
+export default connect(mapStateToProps)(Navigation);

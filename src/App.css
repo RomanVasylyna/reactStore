@@ -22,3 +22,13 @@
   text-decoration: none;
   color: rgb(20, 20, 179);
 }
+
+.counterStyling{
+  background-color: 'gray';
+  color: '#fff';
+  padding:'1px 5px';
+  border-radius: '50%';
+  font-weight: 'bold';
+  position: 'absolute';
+  right: '1vw';
+}
