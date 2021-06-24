@@ -41,7 +41,7 @@ const SingleProduct = (props) => {
                     <p style={{ fontSize: '1.3em' }}>{product.description}</p>
 
                     { addedItem ?
-                        <Button onClick={() => props.dispatch(addItemToCart(product))}>
+                        <Button onClick={() => props.dispatch(addItemToCart({ id: product.id, count: 1, cartPrice: product.price, product: product }))}>
                             Add To Cart <FontAwesomeIcon icon={faCartPlus} />
                         </Button>
                         :

@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
-import csc from 'country-state-city'
+import csc from 'country-state-city';
+import { connect } from 'react-redux';
+import { setCountry, setCity, clearCity } from '../components/store/actions';
 
-const Location = () => {
-
-    // country.isoCode = city.countryCode
-
+const Location = (props) => {
+    
+    // Получаем города и страны и загоняем их в местный state приложения
     let [countries, setCountries] = useState([]);
     let [cities, setCities] = useState([]);
-    let [selectedCountry, setSelectedCountry] = useState('');
-    let [selectedCity, setSelectedCity] = useState('');
-
+    
     useEffect(() => {
         setCountries(csc.getAllCountries());
     }, [countries, cities]);
 
     const getCities = (countryCode) => {
-        setSelectedCountry(csc.getCountryByCode(countryCode).name);
+        // Получаем страну и загоняем ее в store
+        props.dispatch(setCountry(csc.getCountryByCode(countryCode).name));
         setCities(csc.getCitiesOfCountry(countryCode));
-        setSelectedCity('');
+        // Очищаем инпут
+        props.dispatch(clearCity());
     }
 
     return (
         <Form>
             <p style={{ fontWeight: 'bold' }}>Please Select Your Location</p>
-            <p>Your location : {selectedCountry}, {selectedCity}</p>
+            <p>Your location : {props.nationality.country}, {props.nationality.city}</p>
 
             {/* Countries Select */}
             <Form.Group controlId="exampleForm.ControlSelect1">
@@ -45,7 +46,7 @@ const Location = () => {
             {/* Cities Select */}
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>City</Form.Label>
-                <Form.Control as="select" onChange={e => setSelectedCity(e.currentTarget.value)}>
+                <Form.Control as="select" onChange={e => props.dispatch(setCity(e.currentTarget.value))}>
                     <option value="">Please Select Your City</option>
                     {cities.map((city, index) =>
                         <option
@@ -62,4 +63,10 @@ const Location = () => {
     )
 }
 
-export default Location
+const mapStateToProps = state => {
+    return {
+        nationality: state.nationality
+    }
+}
+
+export default connect(mapStateToProps)(Location);

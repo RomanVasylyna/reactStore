@@ -1,10 +1,9 @@
 import React from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { increaseCount, decreaseCount } from '../components/store/actions';
 
-const CartSingleItem = ({ cartItem, increaseCount, decreaseCount }) => {
-
-    // Умножаем price на counter
-    // console.log(cartItem);
+const CartSingleItem = (props) => {
 
     // Some Styling
     const amountSpan = {
@@ -49,16 +48,16 @@ const CartSingleItem = ({ cartItem, increaseCount, decreaseCount }) => {
             <Row style={{ margin: '20px 0px' }}>
 
                 <Col sm={3} md={6}>
-                    <Image src={cartItem.product.imgSrc} fluid></Image>
+                    <Image src={props.cartItem.product.imgSrc} fluid></Image>
                 </Col>
 
                 <Col sm={3} md={6} style={{ textAlign: 'center' }}>
-                    <p style={cartText}>{cartItem.product.name}</p>
+                    <p style={cartText}>{props.cartItem.product.name}</p>
                     <hr></hr>
-                    <button style={cartItem.count === 1 ? blockedBtn : amountBtn} onClick={cartItem.count === 1 ? () => alert('You can\'t choose less than 1 item') : () => decreaseCount(cartItem.id)}>-</button>
-                    <span style={amountSpan}>{cartItem.count}</span>
-                    <button style={amountBtn} onClick={() => increaseCount(cartItem.id)}>+</button>
-                    <p style={cartPrice}>Price/Per Item : {cartItem.cartPrice.toFixed(2)}$</p>
+                    <button style={props.cartItem.count === 1 ? blockedBtn : amountBtn} onClick={props.cartItem.count === 1 ? () => alert('You can\'t choose less than 1 item') : () => props.dispatch(decreaseCount(props.cartItem.id))}>-</button>
+                    <span style={amountSpan}>{props.cartItem.count}</span>
+                    <button style={amountBtn} onClick={() => props.dispatch(increaseCount(props.cartItem.id))}>+</button>
+                    <p style={cartPrice}>Price/Per Item : {props.cartItem.cartPrice.toFixed(2)}$</p>
                 </Col>
 
             </Row>
@@ -67,4 +66,12 @@ const CartSingleItem = ({ cartItem, increaseCount, decreaseCount }) => {
     )
 }
 
-export default CartSingleItem
+const mapStateToProps = (state, ownProps) => {
+    return {
+        cart: state.cart,
+        products: state.products,
+        cartItem: ownProps.cartItem
+    }
+};
+
+export default connect(mapStateToProps)(CartSingleItem);

@@ -48,7 +48,7 @@ const Product = (props) => {
 
 
                 { addedItem ?
-                    <Button variant="primary" onClick={() => props.dispatch(addItemToCart(props.product))}>
+                    <Button variant="primary" onClick={() => props.dispatch(addItemToCart({ id: props.product.id, count: 1, cartPrice: props.product.price, product: props.product }))}>
                         Add to Cart <FontAwesomeIcon icon={faCartPlus} />
                     </Button>
                     :
